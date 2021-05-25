@@ -90,7 +90,7 @@ class database:
     def getTrackFileName (self, trackIndex):  
         return f'track_{str (1000 + trackIndex) [1:]}.wav'
 
-database.createDirectory("one")
-database.createFile("","\one\iets.wav",bach)        
-database.readFile( "\one\iets.wav")
+# database.createDirectory("one")
+# database.createFile("","\one\iets.wav",bach)        
+# database.readFile( "\one\iets.wav")
      
