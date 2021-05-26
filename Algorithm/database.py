@@ -6,7 +6,13 @@ import tomita.legacy.pysynth as ps
 # path in methods should be treated that, folder of python file is home folder 
 
 class database:
-    
+
+    m_bpm = 180,
+    m_transpose = 1,
+    m_pause = 0.0,
+    m_boost = 1.3,
+    m_repeat = 2,
+
     parent_dir =  os.getcwd()
 
     def createDirectory (gen):
@@ -51,11 +57,11 @@ class database:
         for trackIndex, track in enumerate (song):
             ps.make_wav (
                 track,
-                bpm = 180,
-                transpose = 1,
-                pause = 0.0,
-                boost = 1.3,
-                repeat = 2,
+                bpm = database.m_bpm,
+                transpose = database.m_transpose,
+                pause = database.m_pause,
+                boost = database.m_boost,
+                repeat = database.m_repeat,
                 fn = self.getTrackFileName (trackIndex),
             )
 
