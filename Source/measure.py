@@ -2,9 +2,9 @@ from note import Note
 
 class Measure:
     def __init__(self):
-        position = 0
-        fitness_score = 0
-        notes = [Note()]*4
+        self.position = 0
+        self.fitness_score = 0
+        self.notes = [tuple]*4
 
     @property
     def position(self):
