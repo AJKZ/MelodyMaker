@@ -5,18 +5,25 @@ class Note:
         self.pitch = pitch
         self.duration = duration
 
+    @classmethod
+    def with_tuple(cls, tuple):
+        return Note(tuple[0], tuple[1])
+
+    def format_string(self):
+        return (self.pitch, self.duration)
+        
     @property
     def pitch(self):
-        return self.pitch
+        return self._pitch
     
     @pitch.setter
-    def pitch(self, pitch):
-        self.pitch = pitch
+    def pitch(self, p):
+        self._pitch = p
 
     @property
     def duration(self):
-        return self.duration
+        return self._duration
     
     @duration.setter
     def duration(self, duration):
-        self.duration = duration
+        self._duration = duration

@@ -60,8 +60,12 @@ class database:
         f.write(")")
 
     def readFile (self,name):
+        # song[mesaures[notewithuple(tuple)]]
         with open(database.parent_dir + name) as f:
-            file = eval(f.read())
+            file = ast.literal_eval(f.read())
+            
+            print(file)
+
         return file
 
     def playsound (self, name):
@@ -71,12 +75,12 @@ class database:
     def getTrackFileName (self, trackIndex):  
         return f'track_{str (1000 + trackIndex) [1:]}.wav'
 
-# Database = database()
+Database = database()
 # Database.createDirectory("k")
 # Database.createFile("\k\iets.wav",Database.bach, "bach")        
 # Database.createDirectory("One")
 # Database.createFile("\One\iets.txt", Database.bach, "bach")
-# p = Database.readFile("\One\iets.txt")
-
+p = Database.readFile("\Test.txt")
+print(p)
 # Database.createFile("\One\iets.wav", p, "bach")
 # Database.playsound("\One\iets.wav")
