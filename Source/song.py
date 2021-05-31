@@ -4,8 +4,8 @@ class Song:
     def __init__(self):
         self.measures = []
     
-    def format_string(self):
-        return str([measure.format_string() for measure in self.measures])
+    def string_format(self):
+        return str([measure.string_format() for measure in self.measures])
 
     @property
     def measures(self):

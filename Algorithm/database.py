@@ -7,7 +7,7 @@ from playsound import playsound
 # import tomita.legacy.pysynth as ps
 # path in methods should be treated that, folder of python file is home folder 
 
-class database:
+class Database:
     parent_dir =  os.getcwd()
 
     def createDirectory (self, gen):
@@ -75,7 +75,7 @@ class database:
     def getTrackFileName (self, trackIndex):  
         return f'track_{str (1000 + trackIndex) [1:]}.wav'
 
-Database = database()
+# Database = database()
 # Database.createDirectory("k")
 # Database.createFile("\k\iets.wav",Database.bach, "bach")        
 # Database.createDirectory("One")

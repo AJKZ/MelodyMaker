@@ -1,4 +1,4 @@
-from note import Note
+
 
 class Measure:
     def __init__(self):
@@ -6,8 +6,8 @@ class Measure:
         self.fitness_score = 0
         self.notes = [tuple]*4
 
-    def format_string(self):
-        return [note.format_string() for note in self.notes]
+    def string_format(self):
+        return self._notes
 
     @property
     def position(self):
