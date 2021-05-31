@@ -3,7 +3,7 @@
 class Measure:
     def __init__(self):
         self.position = 0
-        self.fitness_score = 0
+        # self.fitness_score = 0
         self.notes = [tuple]*4
 
     def string_format(self):
@@ -17,13 +17,13 @@ class Measure:
     def position(self, pos):
         self._position = pos
     
-    @property
-    def fitness_score(self):
-        return self._fitness_score
+    # @property
+    # def fitness_score(self):
+    #     return self._fitness_score
     
-    @fitness_score.setter
-    def fitness_score(self, score):
-        self._fitness_score = score
+    # @fitness_score.setter
+    # def fitness_score(self, score):
+    #     self._fitness_score = score
 
     @property
     def notes(self):
