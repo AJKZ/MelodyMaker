@@ -1,4 +1,8 @@
-
+"""
+Song class
+Has a list of measures
+Has a fitness score
+"""
 
 class Song:
     def __init__(self):

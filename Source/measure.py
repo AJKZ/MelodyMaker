@@ -1,4 +1,10 @@
-
+"""
+Measure class
+Has a position within a song
+has a list of notes consisting of a tuple with:
+    - the tone of the note
+    - the length of the note
+"""
 
 class Measure:
     def __init__(self):
