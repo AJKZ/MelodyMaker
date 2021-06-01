@@ -1,1 +1,2 @@
-playsound==1.1.0
+playsound==1.2.2
+tomita==0.2.0
