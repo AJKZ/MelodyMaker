@@ -7,7 +7,7 @@ Has a fitness score
 class Song:
     def __init__(self):
         self.measures = []
-        self.fitness_score
+        self.fitness_score = 0
     
     def string_format(self):
         return str([measure.string_format() for measure in self.measures])
