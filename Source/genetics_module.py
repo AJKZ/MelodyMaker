@@ -51,7 +51,9 @@ def generate_initial_population(population_size , measures_amount ):
         measureNotes = []
         #append a song to song list
         song_population.append(Song())
-        #if loop to append notes for a measure
+        #measure position counter
+        measure_position = 0
+        #if loop to append notes for a measur
         for note in range ((measures_amount * 4)+1):
             #if modulus 4 and we are not at index 0
             if note % 4 == 0 and note != 0:
@@ -59,10 +61,14 @@ def generate_initial_population(population_size , measures_amount ):
                 measure_population.append(Measure())
                 #from the last measure we put in the measure list we append the measure we appended (line 63 )
                 measure_population[len(measure_population)-1].notes = measureNotes
+                # set the measure position
+                measure_population[len(measure_population)-1].position = measure_position
                 #we also append the measure to the last song in we appended in the song list
-                song_population[individual].measures.append(measure_population[len(measure_population)-1].notes)
+                song_population[individual].measures.append(measure_population[len(measure_population)-1])
                 # we clear the temporary variabel
                 measure_notes = []
+                #increase measure position
+                measure_position+=1
             # append nodeds to make a measure of 4/4    
             measureNotes.append(note_list[random.randrange(0,len(note_list))])
     #return the song list 
