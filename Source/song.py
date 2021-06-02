@@ -12,6 +12,13 @@ class Song:
     def string_format(self):
         return str([measure.string_format() for measure in self.measures])
 
+    def write_format(self):
+        return [[    
+                    note
+                for measure in self.measures
+            for note in measure.notes
+        ]]
+
     @property
     def measures(self):
         return self._measures

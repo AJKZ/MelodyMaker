@@ -10,7 +10,7 @@ class Measure:
     def __init__(self):
         self.position = 0
         # self.fitness_score = 0
-        self.notes = [tuple]*4
+        self.notes = []
 
     def string_format(self):
         return self._notes
