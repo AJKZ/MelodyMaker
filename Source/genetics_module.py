@@ -56,13 +56,16 @@ def generate_initial_population(song_population_size, measures_per_song):
         song_population.append(Song())
 
         for note in range((measures_per_song * 4) + 1):
+            measure_position = 0
             if note % 4 == 0 and note != 0:
                 measure_population.append(Measure())
-                #from the last measure we put in the measure list we append the measure we appended (line 63 )
+                # set notes and position of measure
                 measure_population[len(measure_population) - 1].notes = measure_notes
-                #we also append the measure to the last song in we appended in the song list
+                measure_population[len(measure_population)-1].position = measure_position
+                # append measure to measures in song
                 song_population[individual].measures.append(measure_population[len(measure_population) - 1])
                 measure_notes = []
+                measure_position+=1
 
             measure_notes.append(NOTES_POOL[random.randrange(0, len(NOTES_POOL))])
 
