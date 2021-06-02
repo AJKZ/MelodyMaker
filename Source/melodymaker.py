@@ -8,10 +8,11 @@ reconstructs music tracks based on user input
 NOTE :
 OPTIONAL
 In `tomita` module, comment out the prints in `mkfreq.py#getfreq`,
-so that the console isn't flooded with piano key information
+so that the console isn't flooded with piano key information at the start of every run
 """
 
 import ast
+import click
 import os
 from pathlib import Path
 from playsound import playsound
@@ -22,21 +23,23 @@ from measure import Measure
 from song import Song
 
 
-def main():
+@click.command()
+@click.option('--init_population_size', default=10, prompt='Initial population size: ', type=int)
+@click.option('--measures_per_song', default=4, prompt='Measures per song: ', type=int)
+@click.option('--max_generations', default=8, prompt='Max generations: ', type=int)
+def main(init_population_size: int, measures_per_song: int, max_generations: int):
     db = Database()
-
-    db.create_generation_dir('one')
     
-    path_to_bach = Path(os.getcwd()).parent.joinpath('sample_song.txt').as_posix()
-    with open(path_to_bach) as b:
-        bach = ast.literal_eval(b.read())
+    initial_population = gn.generate_initial_population(init_population_size, measures_per_song)
 
-    bach = [bach[0] + bach[1]]
-    i = 1
-    db.generate_song('one', str(i), bach)
+    current_generation = 0
+    while current_generation < max_generations:
+        db.create_generation_dir(str(current_generation))
 
-    # path = Path(os.getcwd()).parent.joinpath('song.wav').as_posix()
-    # playsound(path)
+        for idx_for_name, song in enumerate(initial_population):
+            db.generate_song(str(current_generation), str(idx_for_name), song.write_format())
+
+        current_generation += 1
 
 
 if __name__ == '__main__':
