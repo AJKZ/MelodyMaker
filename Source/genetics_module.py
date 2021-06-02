@@ -62,7 +62,7 @@ def generate_initial_population(population_size , measures_amount ):
                 #we also append the measure to the last song in we appended in the song list
                 song_population[individual].measures.append(measure_population[len(measure_population)-1].notes)
                 # we clear the temporary variabel
-                measureNotes = []
+                measure_notes = []
             # append nodeds to make a measure of 4/4    
             measureNotes.append(note_list[random.randrange(0,len(note_list))])
     #return the song list 
