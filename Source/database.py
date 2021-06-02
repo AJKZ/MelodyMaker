@@ -35,7 +35,7 @@ class Database:
                 transpose = 1,
                 pause = 0.0,
                 boost = 1.3,
-                repeat = 1,
+                repeat = 0,
                 fn = self.root_path.joinpath(str(generation_num)).joinpath(str(song_name)).as_posix()
             )
 
