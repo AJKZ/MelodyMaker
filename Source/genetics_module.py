@@ -8,36 +8,36 @@ def generate_individual_name(index):
     return f'track_{str(1000 + track_index) [1:]}.wav'
 
 def mutate(measure):
-    mutatedMeasure = []
+    mutated_measure = []
     # gives random floating numbers between 0 and 1
-    mutateChance = random.random()
+    mutate_chance = random.random()
     # if chance is between 0.1 and 0.25 we mutate 1 note
-    if mutateChance > 0.1 and mutateChance <= 0.25:
+    if mutate_chance > 0.1 and mutate_chance <= 0.25:
         # random a note to mutate 
-        mutatedNote1 = random.randrange(0,4)
-        mutatedNote2 = random.randrange(0,4)
-        while(mutatedNote1 == mutatedNote2):
-            mutatedNote2 = random.randrange(0,4)
-        print("point mutation",mutatedNote1,mutatedNote2)
-        mutatedMeasure = measure
-        mutatedMeasure[mutatedNote1] = measure[mutatedNote2]
-        #mutatingMeasure[mutatedNote2] = measure[mutatedNote1]
-    elif mutateChance > 0.05 and mutateChance <= 0.1:
+        mutated_note1 = random.randrange(0,4)
+        mutated_note2 = random.randrange(0,4)
+        while(mutated_note1 == mutated_note2):
+            mutated_note2 = random.randrange(0,4)
+        print("point mutation",mutated_note1,mutated_note2)
+        mutated_measure = measure
+        mutated_measure[mutated_note1] = measure[mutated_note2]
+        #mutatingMeasure[mutated_note2] = measure[mutated_note1]
+    elif mutate_chance > 0.05 and mutate_chance <= 0.1:
         shift = random.randrange(1,4)
         print("shift mutation :" , shift)
         for note in range (len(measure)):
-            mutatedMeasure.append(measure[(note+shift)% 4])
-    elif mutateChance < 0.05:
+            mutated_measure.append(measure[(note+shift)% 4])
+    elif mutate_chance < 0.05:
         print("gen mutation")
         for note in range (len(measure)):
-            mutatedMeasure.append(measure[random.randrange(0,4)])
+            mutated_measure.append(measure[random.randrange(0,4)])
     else:    
         print("measure not mutated")
-        mutatedMeasure = measure
+        mutated_measure = measure
 
-    return mutatedMeasure
+    return mutated_measure
 
-def generate_initial_population(population_size , measures_amount):
+def generate_initial_population(population_size , measures_amount ):
     #can make global
     note_list = [('c4', 4), ('d', 4), ('e', 4), ('f', 4),('g', 4), ('a', 4), ('b', 4),('c5',4)]
     #to store list of all measures
