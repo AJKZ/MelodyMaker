@@ -23,8 +23,10 @@ class Database:
         
         self.root_path.mkdir()
 
+
     def create_generation_dir(self, generation_num):
         self.root_path.joinpath(str(generation_num)).mkdir()
+
 
     def generate_song(self, generation_num: str, song_name: str, song: list):
         song_name += '.wav'
@@ -41,6 +43,7 @@ class Database:
 
         return
 
+
     def write_song_to_file(self, generation, song_name, song):
         f = self.root_path.joinpath(str(generation)).joinpath(str(song_name)).open('w+')
         f.write_text('[[')
@@ -49,6 +52,7 @@ class Database:
                 f.write_text(str(note))
                 f.write_text(',')
         f.write_text(']]')
+
 
     def get_songs(self, name):
         """
@@ -61,9 +65,11 @@ class Database:
 
         return file
 
+
     @property
     def root_path(self):
         return self._root_path
+
 
     @root_path.setter
     def root_path(self, new_path):

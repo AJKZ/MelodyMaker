@@ -12,28 +12,35 @@ class Measure:
         # self.fitness_score = 0
         self.notes = []
 
+
     def string_format(self):
         return self._notes
+
 
     @property
     def position(self):
         return self._position
 
+
     @position.setter
     def position(self, pos):
         self._position = pos
     
+
     # @property
     # def fitness_score(self):
     #     return self._fitness_score
     
+
     # @fitness_score.setter
     # def fitness_score(self, score):
     #     self._fitness_score = score
 
+
     @property
     def notes(self):
         return self._notes
+
 
     @notes.setter
     def notes(self, list_of_notes):

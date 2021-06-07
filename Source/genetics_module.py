@@ -3,19 +3,19 @@ import random
 from measure import Measure
 from song import Song
 
+
 NOTES_POOL = [
-        ('c4', 4),
-        ('d', 4),
-        ('e', 4),
-        ('f', 4),
-        ('g', 4),
-        ('a', 4),
-        ('b', 4),
-        ('c5',4)
+        ('c4', 4), ('d', 4), ('e', 4), ('f', 4), ('g', 4), ('a', 4), ('b', 4), ('c5',4)
     ]
+
 
 def generate_individual_name(index):
     return f'track_{str(1000 + index) [1:]}.wav'
+
+
+def fitness():
+    pass
+
 
 def mutate(measure):
     mutated_measure = []
@@ -46,6 +46,7 @@ def mutate(measure):
         mutated_measure = measure
 
     return mutated_measure
+
 
 def generate_initial_population(song_population_size, measures_per_song):
     measure_population = []
