@@ -17,6 +17,7 @@ import ast
 import click
 import os
 from pathlib import Path
+from random import randint
 
 import genetics as gn
 from database import Database
@@ -32,7 +33,7 @@ from song import Song
 def main(population_size: int, measures_per_song: int, max_generations: int, num_crossovers: int):
     db = Database()
     
-    population = gn.generate_initial_population(init_population_size, measures_per_song)
+    population = gn.generate_initial_population(population_size, measures_per_song)
 
     current_generation = 0
     while current_generation < max_generations:
@@ -43,9 +44,34 @@ def main(population_size: int, measures_per_song: int, max_generations: int, num
             db.generate_song(str(current_generation), str(song_idx), song.write_format())
             song_path = db.root_path.joinpath(str(current_generation)).joinpath(str(song_idx)).as_posix()
             db.write_song_to_file(current_generation, song_path + '.txt', song)
-            population[song_idx].fitness_score = gn.fitness(song_path + '.wav', population[song_idx])
+            population[song_idx].fitness_score = gn.fitness(song_path + '.wav')
 
+        # generate children with highest scoring parents
         parents = gn.selection(population)
+        next_generation = [
+                    gn.crossover_notes(parents) if measures_per_song == 1 
+                else gn.crossover_measures(parents)
+            for i in range(num_crossovers)
+        ]
+
+        # mutate measures (chance randomizer happens in function)
+        for song_idx in range(len(population[2:])):
+            for measure_idx in range(measures_per_song):
+                population[song_idx].measures[measure_idx] = gn.mutate(population[song_idx].measures[measure_idx])
+        
+        # fill up rest of next generation with random selection out of population not used as parents
+        while len(next_generation) < population_size:
+            selection_chance = randint(1, population[2].fitness_score)
+
+            for song_idx, song in enumerate(population):
+                if song.fitness_score > selection_chance:
+                    selected_song = population.pop(song_idx)
+                    break
+
+            next_generation.append(selected_song)
+            # next_generation.append(gn.populate_with(population[1:]))
+
+        population = next_generation
 
         current_generation += 1
 
