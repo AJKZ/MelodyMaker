@@ -25,10 +25,11 @@ from song import Song
 
 
 @click.command()
-@click.option('--init_population_size', default=10, prompt='Initial population size, default: ', type=int)
-@click.option('--measures_per_song', default=4, prompt='Measures per song, default: ', type=int)
-@click.option('--max_generations', default=8, prompt='Max generations, default: ', type=int)
-def main(init_population_size: int, measures_per_song: int, max_generations: int):
+@click.option('--population_size', default=10, prompt='Population size, default', type=int)
+@click.option('--measures_per_song', default=4, prompt='Measures per song, default', type=int)
+@click.option('--max_generations', default=8, prompt='Max generations, default', type=int)
+@click.option('--num_crossovers', default=6, prompt='Number of crossovers per generation, default', type=int)
+def main(population_size: int, measures_per_song: int, max_generations: int, num_crossovers: int):
     db = Database()
     
     population = gn.generate_initial_population(init_population_size, measures_per_song)
