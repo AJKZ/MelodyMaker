@@ -17,16 +17,10 @@ def generate_individual_name(index):
     return f'track_{str(1000 + index) [1:]}.wav'
 
 
-def fitness(song, song_object):
-    print('\nPlaying song ' + song.split('generations/')[-1] + '...')
-    playsound(song)
-    score = input('Score (1-10): ')
-
-    try:
-        score = int(score)
-    except ValueError:
-        score = 0
-
+def fitness(song_file_name):
+    print('\nPlaying song ' + song_file_name.split('generations/')[-1] + '...')
+    playsound(song_file_name)
+    score = click.prompt('Score (1-10)', type=int)
     return score
 
 
