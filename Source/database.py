@@ -54,16 +54,10 @@ class Database:
         f.write_text(']]')
 
 
-    def get_songs(self, name):
-        """
-        Reads into a generation's directory,
-        parses the songs into Song and Measure objects,
-        and returns a list of the Song objects
-        """
-        with open(database.parent_dir + name) as f:
-            file = ast.literal_eval(f.read())
-
-        return file
+    # def get_song_names(self, generation):
+    #     search_dir = self.root_path.joinpath(str(generation)).glob('**/*')
+    #     song_names = [song for song in search_dir if song.is_file()]
+    #     return song_names
 
 
     @property
