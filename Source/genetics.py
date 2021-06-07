@@ -1,4 +1,8 @@
+import click
 import random
+import re
+from operator import attrgetter
+from playsound import playsound
 
 from measure import Measure
 from song import Song
@@ -13,9 +17,22 @@ def generate_individual_name(index):
     return f'track_{str(1000 + index) [1:]}.wav'
 
 
-def fitness():
-    pass
+def fitness(song, song_object):
+    print('\nPlaying song ' + song.split('generations/')[-1] + '...')
+    playsound(song)
+    score = input('Score (1-10): ')
 
+    try:
+        score = int(score)
+    except ValueError:
+        score = 0
+
+    return score
+
+
+def selection(population):
+    sorted_population = sorted(population, key=lambda song: song.fitness_score, reverse=True)
+    return (sorted_population[0], sorted_population[1])
 
 def mutate(measure):
     mutated_measure = []
