@@ -29,30 +29,35 @@ def selection(population):
     return (sorted_population[0], sorted_population[1])
 
 def mutate(measure):
-    mutated_measure = []
-    mutate_chance = random.random()
+    mutate_chance = random()
+    mutated_measure = Measure()
 
-    if mutate_chance > 0.1 and mutate_chance <= 0.25:
-        print('A measure undergoes point mutation')
-        mutated_note1 = random.randrange(0, 4)
-        mutated_note2 = random.randrange(0, 4)
+    if mutate_chance > 0.2 and mutate_chance <= 0.35:
+        print('\nA measure undergoes point mutation\nOld measure: ', measure.string_format())
+        mutated_note1 = randrange(0, 4)
+        mutated_note2 = randrange(0, 4)
 
         while(mutated_note1 == mutated_note2):
-            mutated_note2 = random.randrange(0, 4)
+            mutated_note2 = randrange(0, 4)
         
         mutated_measure = measure
-        mutated_measure[mutated_note1] = measure[mutated_note2]
+        mutated_measure.notes[mutated_note1] = measure.notes[mutated_note2]
+        print('Mutated measure: ', mutated_measure.string_format())
 
-    elif mutate_chance > 0.05 and mutate_chance <= 0.1:
-        print("A measure undergoes shift mutation")
-        shift = random.randrange(1, 4)
+    elif mutate_chance > 0.15 and mutate_chance <= 0.2:
+        print('\nA measure undergoes shift mutation\nOld measure: ', measure.string_format())
+        shift = randrange(1, 4)
 
-        for note in range (len(measure)):
-            mutated_measure.append(measure[(note + shift) % 4])
-    elif mutate_chance <= 0.05:
-        print("A measure undergoes gene mutation")
-        for note in range (len(measure)):
-            mutated_measure.append(measure[random.randrange(0, 4)])
+        for note in range (len(measure.notes)):
+            mutated_measure.notes.append(measure.notes[(note + shift) % 4])
+        print('Mutated measure: ', mutated_measure.string_format())
+
+    elif mutate_chance <= 0.15:
+        print('\nA measure undergoes gene mutation\nOld measure: ', measure.string_format())
+        for note in range (len(measure.notes)):
+            mutated_measure.notes.append(measure.notes[randrange(0, 4)])
+        print('Mutated measure: ', mutated_measure.string_format())
+
     else:
         mutated_measure = measure
 
