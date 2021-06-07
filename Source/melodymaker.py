@@ -69,7 +69,6 @@ def main(population_size: int, measures_per_song: int, max_generations: int, num
                     break
 
             next_generation.append(selected_song)
-            # next_generation.append(gn.populate_with(population[1:]))
 
         population = next_generation
 
