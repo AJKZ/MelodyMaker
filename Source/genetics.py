@@ -1,8 +1,8 @@
 import click
-import random
 import re
 from operator import attrgetter
 from playsound import playsound
+from random import random, randrange, randint
 
 from measure import Measure
 from song import Song
@@ -25,8 +25,30 @@ def fitness(song_file_name):
 
 
 def selection(population):
-    sorted_population = sorted(population, key=lambda song: song.fitness_score, reverse=True)
-    return (sorted_population[0], sorted_population[1])
+    population.sort(key=lambda song: song.fitness_score, reverse=True)
+    return [population[0], population[1]]
+
+
+def crossover_notes(parents):
+    child = Song()
+    child.measures = [Measure()]
+
+    measure_a, measure_b = parents[0].measures[0], parents[1].measures[0]
+    split = randint(1, len(measure_a.notes) - 1)
+    child.measures[0].notes += measure_a.notes[0:split] + measure_b.notes[split:]
+
+    return child
+
+
+def crossover_measures(parents):
+    child = Song()
+
+    measures_a, measures_b = parents[0].measures, parents[1].measures
+    split = randint(1, len(measures_a) - 1)
+    child.measures += measures_a[0:split] + measures_b[split:]
+
+    return child
+
 
 def mutate(measure):
     mutate_chance = random()
@@ -84,6 +106,6 @@ def generate_initial_population(song_population_size, measures_per_song):
                 measure_notes = []
                 measure_position += 1
 
-            measure_notes.append(NOTES_POOL[random.randrange(0, len(NOTES_POOL))])
+            measure_notes.append(NOTES_POOL[randrange(0, len(NOTES_POOL))])
 
     return song_population
