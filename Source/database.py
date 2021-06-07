@@ -44,16 +44,20 @@ class Database:
         return
 
 
-    def write_song_to_file(self, generation, song_name, song):
+    def write_song_to_file(self, generation, song_name, song_obj):
         f = self.root_path.joinpath(str(generation)).joinpath(str(song_name)).open('w+')
-        f.write_text('[[')
-        for measure in song:
-            for note in measure:
-                f.write_text(str(note))
-                f.write_text(',')
-        f.write_text(']]')
+        f.write('[[')
+        for measure in song_obj.measures:
+            for note in measure.notes:
+                f.write(str(note))
+                f.write(',')
+        f.write(']]')
 
 
+    # def read_song_from_file(self, generation):
+    #     pass
+    #
+    #
     # def get_song_names(self, generation):
     #     search_dir = self.root_path.joinpath(str(generation)).glob('**/*')
     #     song_names = [song for song in search_dir if song.is_file()]

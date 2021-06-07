@@ -7,37 +7,44 @@ reconstructs music tracks based on user input
 
 NOTE :
 OPTIONAL
-In `tomita` module, comment out the prints in `mkfreq.py#getfreq`,
-so that the console isn't flooded with piano key information at the start of every run
+so that the console isn't flooded with prints:
+In `tomita` module,
+comment out the prints in `mkfreq.py#getfreq`,
+also in `pysynth.py` lines 151, 158, 187
 """
 
 import ast
 import click
 import os
 from pathlib import Path
-from playsound import playsound
 
-import genetics_module as gn
+import genetics as gn
 from database import Database
 from measure import Measure
 from song import Song
 
 
 @click.command()
-@click.option('--init_population_size', default=10, prompt='Initial population size: ', type=int)
-@click.option('--measures_per_song', default=4, prompt='Measures per song: ', type=int)
-@click.option('--max_generations', default=8, prompt='Max generations: ', type=int)
+@click.option('--init_population_size', default=10, prompt='Initial population size, default: ', type=int)
+@click.option('--measures_per_song', default=4, prompt='Measures per song, default: ', type=int)
+@click.option('--max_generations', default=8, prompt='Max generations, default: ', type=int)
 def main(init_population_size: int, measures_per_song: int, max_generations: int):
     db = Database()
     
-    initial_population = gn.generate_initial_population(init_population_size, measures_per_song)
+    population = gn.generate_initial_population(init_population_size, measures_per_song)
 
     current_generation = 0
     while current_generation < max_generations:
         db.create_generation_dir(str(current_generation))
 
-        for idx_for_name, song in enumerate(initial_population):
-            db.generate_song(str(current_generation), str(idx_for_name), song.write_format())
+        # generate (.wav & .txt), present (listen to), and rate songs
+        for song_idx, song in enumerate(population):
+            db.generate_song(str(current_generation), str(song_idx), song.write_format())
+            song_path = db.root_path.joinpath(str(current_generation)).joinpath(str(song_idx)).as_posix()
+            db.write_song_to_file(current_generation, song_path + '.txt', song)
+            population[song_idx].fitness_score = gn.fitness(song_path + '.wav', population[song_idx])
+
+        parents = gn.selection(population)
 
         current_generation += 1
 
