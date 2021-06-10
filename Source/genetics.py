@@ -14,10 +14,6 @@ NOTES_POOL = [
     ]
 
 
-def generate_individual_name(index):
-    return f'track_{str(1000 + index) [1:]}.wav'
-
-
 def fitness(song_file_name):
     print('\nPlaying song ' + song_file_name.split('generations/')[-1] + '...')
     playsound(song_file_name)

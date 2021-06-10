@@ -54,16 +54,6 @@ class Database:
         f.write(']]')
 
 
-    # def read_song_from_file(self, generation):
-    #     pass
-    #
-    #
-    # def get_song_names(self, generation):
-    #     search_dir = self.root_path.joinpath(str(generation)).glob('**/*')
-    #     song_names = [song for song in search_dir if song.is_file()]
-    #     return song_names
-
-
     @property
     def root_path(self):
         return self._root_path
